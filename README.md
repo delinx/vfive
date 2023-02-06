@@ -1,2 +1,2 @@
-# cpp-project-template
-My CPP project template with CMake, clang, Ninja
+# c-project-template
+My C project template with CMake, clang, Ninja
