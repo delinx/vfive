@@ -1,7 +1,7 @@
 #include "types.h"
 #include <stdio.h>
 
-int main()
+i32 main()
 {
 
     return 0;
