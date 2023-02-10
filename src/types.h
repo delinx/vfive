@@ -1,6 +1,7 @@
 #ifndef TYPES_HPP
 #define TYPES_HPP
 
+#include <stdbool.h>
 #include <stddef.h>
 
 // 1 byte

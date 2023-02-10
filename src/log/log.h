@@ -2,7 +2,9 @@
 #define LOG_H
 #pragma once
 #include "../types.h"
+#include <stdio.h>
 #include <string.h>
+#include <time.h>
 
 static const usize LOG_BUFFER_LIMIT = 1024;
 
@@ -28,7 +30,7 @@ enum LOG_COLOR_ENUM
     LOG_COLOR_ENUM_COUNT
 };
 
-static const char* log_colorcode_from_enum[] = {
+static const char* log_color_from_enum[] = {
     "\033[30m",
     "\033[31m",
     "\033[32m",
@@ -65,16 +67,13 @@ static const char* log_level_from_enum[] = {
 
 // print.c
 extern void log_internal_print(enum LOG_LEVEL_ENUM level, const i8* str, i32 line, const char* file);
-extern void log_internal_debug(const i8* str, i32 line, const char* file);
-extern void log_internal_information(const i8* str, i32 line, const char* file);
-extern void log_internal_warning(const i8* str, i32 line, const char* file);
-extern void log_internal_error(const i8* str, i32 line, const char* file);
+static bool log_save_to_file = true;
 
 #define __FILENAME__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
 
-#define log_debug(a)       log_internal_debug(a, __LINE__, __FILENAME__);
-#define log_information(a) log_internal_information(a, __LINE__, __FILENAME__);
-#define log_warning(a)     log_internal_warning(a, __LINE__, __FILENAME__);
-#define log_error(a)       log_internal_error(a, __LINE__, __FILENAME__);
+#define log_debug(a)       log_internal_print(LOG_LEVEL_ENUM_DEBUG, a, __LINE__, __FILENAME__);
+#define log_information(a) log_internal_print(LOG_LEVEL_ENUM_INFORMATION, a, __LINE__, __FILENAME__);
+#define log_warning(a)     log_internal_print(LOG_LEVEL_ENUM_WARNING, a, __LINE__, __FILENAME__);
+#define log_error(a)       log_internal_print(LOG_LEVEL_ENUM_ERROR, a, __LINE__, __FILENAME__);
 
 #endif  // !LOG_H
